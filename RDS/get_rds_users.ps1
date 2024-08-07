@@ -5,6 +5,11 @@ if (($args[0]-eq $null)-or($args[1]-eq $null)){
     $WARNING = $args[0]
     $CRITICAL = $args[1]
 }
+if ($WARNING -ge $CRITICAL){
+    Write-Output "UNKNOWN: La valeur de WARNING est superieur/egale a la valeur de CRITICAL"
+    exit 3
+}
+
 #Recuperation du nombre d'utilisateurs
 $userCount = (query user).count -1
 

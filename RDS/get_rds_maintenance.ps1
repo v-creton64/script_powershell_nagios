@@ -23,7 +23,11 @@ if (($args[1]-eq $null)-or($args[2]-eq $null)){
     $WARNING = $args[1]
     $CRITICAL = $args[2]
 }
-
+# Vérification de Warning > critical
+if ($WARNING -ge $CRITICAL){
+    Write-Output "UNKNOWN: La valeur de WARNING est superieur/egale a la valeur de CRITICAL"
+    exit 3
+}
 #Recuperation du nombre de serveur en maintenance
 $MAINTENANCE = (Get-RDSessionHost -CollectionName $COLLECTION | Where-Object {$_.NewConnectionAllowed -eq "NO"}).count
 #Recuperation de la liste des serveurs en maintenance
